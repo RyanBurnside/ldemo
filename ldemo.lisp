@@ -37,39 +37,35 @@
         :for i :across l-string :do
           (setf current-turt (first stack))
           (case i
-            (#\+ (rt current-turt angle))
-            (#\- (lt current-turt angle))
+            (#\+ (lt current-turt angle))
+            (#\- (rt current-turt angle))
             (#\F (fd current-turt step))
             (#\[ (push (clone-turtle current-turt) stack))
             (#\] (pop stack)))))
 
 (defun main ()
-  (with-nodgui ()
+  (with-nodgui (:title "L System Toy")
+    (set-geometry-wh *tk* 800 600)
     (let* ((sc (make-instance 'scrolled-canvas))
            (c (canvas sc))
            (draw-fn (lambda (&rest attribs)
                       (apply #'draw-line c attribs)))
-           (turt (make-instance 'turtle :x 240 :y 600 :color "green" :draw-fn draw-fn))
+           (turt (make-instance 'turtle :x 100 :y 600 :color "green" :draw-fn draw-fn))
            (l-string (expand-path 4 "F" '(#\F . "FF-[-F+F+F]+[+F-F-F]")))
            (turt2 (make-instance 'turtle :x 400 :y 600 :color "peru" :draw-fn draw-fn))
            (l-string2 (expand-path 7
                                    "X"
                                    '(#\X . "F[+X][-X]FX")
                                    '(#\F . "FF")))
-           (turt3 (make-instance 'turtle :x 600 :y 600 :color "brown" :draw-fn draw-fn))
+           (turt3 (make-instance 'turtle :x 700 :y 600 :color "brown" :draw-fn draw-fn))
            (l-string3 (expand-path 5
                                    "X"
                                    '(#\X . "F-[[X]+X]+F[+FX]-X")
-                                   '(#\F . "FF")))
-           (turt4 (make-instance 'turtle :x 720 :y 600 :color "olive" :draw-fn draw-fn))
-           (l-string4 (expand-path 3
-                                   "F"
-                                   '(#\F . "FF[+F]FF[-FF]"))))
-
+                                   '(#\F . "FF"))))
+      (configure c :background "linen")
       (draw-l-system 22.5 7 turt l-string)
       (draw-l-system 25.7 2 turt2 l-string2)
       (draw-l-system 25.7 6 turt3 l-string3)
-      (draw-l-system 30.5 6 turt4 l-string4)
       (pack sc :expand 1 :fill :both)
       (scrollregion c 0 0 800 600))))
 
