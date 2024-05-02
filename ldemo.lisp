@@ -28,6 +28,7 @@
 
 
 (defun draw-line (canvas x y x2 y2 color pen-width)
+  "Wrapper for adding a line to a canvas."
   (make-line canvas `(,x ,y ,x2 ,y2) :fill color :width pen-width))
 
 ;;; Special to this demo
@@ -50,14 +51,22 @@
            (c (canvas sc))
            (draw-fn (lambda (&rest attribs)
                       (apply #'draw-line c attribs)))
-           (turt (make-instance 'turtle :x 100 :y 600 :color "green" :draw-fn draw-fn))
-           (l-string (expand-path 4 "F" '(#\F . "FF-[-F+F+F]+[+F-F-F]")))
-           (turt2 (make-instance 'turtle :x 400 :y 600 :color "peru" :draw-fn draw-fn))
+           (turt (make-instance 'turtle :x 100 :y 600
+                                        :color "green"
+                                        :draw-fn draw-fn))
+           (l-string (expand-path 4
+                                  "F"
+                                  '(#\F . "FF-[-F+F+F]+[+F-F-F]")))
+           (turt2 (make-instance 'turtle :x 400 :y 600
+                                         :color "peru"
+                                         :draw-fn draw-fn))
            (l-string2 (expand-path 7
                                    "X"
                                    '(#\X . "F[+X][-X]FX")
                                    '(#\F . "FF")))
-           (turt3 (make-instance 'turtle :x 700 :y 600 :color "brown" :draw-fn draw-fn))
+           (turt3 (make-instance 'turtle :x 700 :y 600
+                                         :color "brown"
+                                         :draw-fn draw-fn))
            (l-string3 (expand-path 5
                                    "X"
                                    '(#\X . "F-[[X]+X]+F[+FX]-X")
