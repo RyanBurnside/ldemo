@@ -12,10 +12,12 @@
 
 (in-package :ldemo)
 
+
 (defun dummy-fn (&rest args)
   "Harmless default function, consume arguments return NIL."
   (declare (ignore args))
   nil)
+
 
 (defclass turtle ()
   ((x :initarg :x :accessor x :initform 0)
@@ -99,6 +101,15 @@
 (defmethod sety ((turt turtle) value)
   "Jump to y (no drawing)."
   (setf (y turt) value))
+
+
+(defmethod setpc ((turt turtle) value)
+  "Set the color to value."
+  (setf (color turt) value))
+
+
+(defmethod setpensize ((turt turtle) value)
+  (setf (pen-size turt) value))
 
 
 (defmethod setpos ((turt turtle) x y)
