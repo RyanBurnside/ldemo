@@ -2,18 +2,6 @@
 
 (in-package #:ldemo)
 
-(defun expand-path-old (iterations initial-string &rest replacement-rules)
-  "Given an initial string and replacement rules recursivly iterate
-   <initial-string> with rules sequentially <iterations> times. A rule
-   is a pair with term to be replaced and its replacement."
-  (dotimes (i iterations)
-    (dolist (rule replacement-rules)
-      (setf initial-string (str:replace-all (car rule)
-                                            (cdr rule)
-                                            initial-string))))
-  initial-string)
-
-
 (defun expand-path (iterations initial-string &rest replacement-rules)
   "Given an initial string and replacement rules recursivly iterate
    <initial-string> with rules sequentially <iterations> times. A rule
@@ -31,6 +19,7 @@
   "Wrapper for adding a line to a canvas."
   (make-line canvas `(,x ,y ,x2 ,y2) :fill color :width pen-width))
 
+
 ;;; Special to this demo
 (defun draw-l-system (angle step turt l-string)
   (loop :with stack = `(,turt)
@@ -43,6 +32,7 @@
             (#\F (fd current-turt step))
             (#\[ (push (clone-turtle current-turt) stack))
             (#\] (pop stack)))))
+
 
 (defun main ()
   (with-nodgui (:title "L System Toy")
