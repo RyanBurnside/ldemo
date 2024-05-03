@@ -9,5 +9,5 @@
   :depends-on (#:str
                #:nodgui)
   :components ((:file "package")
-               (:file "turt")
+               (:file "turtle")
                (:file "ldemo")))
