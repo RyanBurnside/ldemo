@@ -10,6 +10,6 @@ Then:
 
 
 ## License
+Open Source with Attribution
 
-All rights reserved.
 
